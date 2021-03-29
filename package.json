@@ -1,8 +1,8 @@
 {
-  "name": "github-download-dir",
+  "name": "gh-download-dir",
   "version": "1.0.0",
   "description": "node module to download specific directory of a public github repo",
-  "main": "github-download-dir.js",
+  "main": "gh-download-dir.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,10 +23,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DarthCucumber/github-download-dir.git"
+    "url": "git+https://github.com/DarthCucumber/gh-download-dir.git"
   },
   "bugs": {
-    "url": "https://github.com/DarthCucumber/github-download-dir/issues"
+    "url": "https://github.com/DarthCucumber/gh-download-dir/issues"
   },
-  "homepage": "https://github.com/DarthCucumber/github-download-dir#readme"
+  "homepage": "https://github.com/DarthCucumber/gh-download-dir#readme"
 }
