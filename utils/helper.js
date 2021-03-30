@@ -1,6 +1,6 @@
 const urljoin = require('url-join');
 const download = require('download');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 
 // verify passed options
@@ -23,26 +23,18 @@ exports.formUrl = function (options) {
     if (options.branch.length !== 0) {
         apiEndpoint = urljoin(apiEndpoint, `?ref=${options.branch}`);
     }
-    console.log(apiEndpoint);
+    // console.log(apiEndpoint);
     return apiEndpoint;
 }
 
 exports.downloadFiles = async function (fileList, outdir) {
     for (filepath in fileList) {
         let dirpath = path.join(outdir, filepath);
-        createParentDir(dirpath);
+        // createParentDir(dirpath);
         let downloadUrl = fileList[filepath];
-        fs.writeFileSync(dirpath, await download(downloadUrl));
-    }
-}
-
-function createParentDir(dirpath) {
-    let tmp = dirpath.split("/");//remove file name from path
-    tmp.pop();
-    let parent = path.join(...tmp);
-    // if parent folder doesn't exist
-    if (!fs.existsSync(parent)) {
-        // create one
-        fs.mkdirSync(parent, { recursive: true });
+        fs.ensureFile(dirpath,async (err) => {
+            if(err) throw new Error(err);
+            await download(downloadUrl); 
+        });
     }
 }

@@ -1,17 +1,19 @@
-# gh-dir
+# gh-retrieve
 
-Nodejs module to download a specific directory or sub-directory from a public GitHub repository
+Nodejs module to download/retrieve a specific directory or sub-directory from a public GitHub repository
+
+Any contribution is appreciated and please do report bugs if you find any.
 
 ## Demo:
 
 ```js
-const GithubDownloadDir = require("gh-dir");
+const GithubDownloadDir = require("gh-retrieve");
 
 GithubDownloadDir({
-  author: "DarthCucumber",
-  repo: "gofuzz",
-  dir: "pkg",
-  outdir: "test",
+  author: "DarthCucumber", //repository owner
+  repo: "gofuzz", //repository name
+  dir: "pkg", //target directory to download
+  outdir: "test", //directory to download in
 })
   .then(() => {
     console.log("download complete...");
@@ -26,7 +28,7 @@ and boom! you have the files downloaded.
 to download any sub directory, just enter the path like so:
 
 ```js
-const GithubDownloadDir = require("gh-dir");
+const GithubDownloadDir = require("gh-retrieve");
 
 GithubDownloadDir({
   author: "DarthCucumber",
@@ -39,6 +41,28 @@ GithubDownloadDir({
   })
   .catch((err) => {
     console.log(err);
+  });
+```
+
+how to use with [ora](https://www.npmjs.com/package/ora)  with **gh-retrieve**?
+
+```js
+const GithubDownloadDir = require("gh-retrieve");
+const ora=require("ora");
+
+const spinner=ora("downloading files...").start();
+
+GithubDownloadDir({
+  author: "DarthCucumber", //repository owner
+  repo: "gofuzz", //repository name
+  dir: "pkg", //target directory to download
+  outdir: "test", //directory to download in
+})
+  .then(() => {
+    spinner.succeed("download complete...");
+  })
+  .catch((err) => {
+    spinner.fail(err.message);
   });
 ```
 
@@ -60,7 +84,7 @@ takes options object as argument.
 }
 ```
 
-Using this module's repo as example. `https://github.com/DarthCucumber/gh-dir`
+Using this module's repo as example. `https://github.com/DarthCucumber/gh-retrieve`
 
 - **author** takes username of the repository owner _(required)_
 
@@ -68,7 +92,7 @@ example: **DarthCucumber** is **author** in the example url
 
 - **repo** takes the repository name from where you want to download a specific directory _(required)_
 
-example: **gh-dir** is **repo**
+example: **gh-retrieve** is **repo**
 
 - **dir** takes in target directory you want to download. _(required)_
 - **branch** takes in branch of the repo _(optional)_
