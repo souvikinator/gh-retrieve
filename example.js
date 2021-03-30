@@ -1,4 +1,4 @@
-const ghdowndir=require("./gh-download-dir");
+const ghdowndir=require("./gh-dir");
 
 ghdowndir({
 	author:"DarthCucumber",

@@ -1,8 +1,8 @@
 {
-  "name": "gh-download-dir",
+  "name": "gh-dir",
   "version": "1.0.0",
   "description": "Nodejs module to download a specific directory from a GitHub repository",
-  "main": "gh-download-dir.js",
+  "main": "gh-dir.js",
   "dependencies": {
     "axios": "^0.21.1",
     "download": "^8.0.0",
@@ -10,17 +10,24 @@
   },
   "devDependencies": {},
   "scripts": {
+    "demo":"node example.js",
     "test": "echo \"Error: no test specified\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DarthCucumber/gh-download-dir.git"
+    "url": "git+https://github.com/DarthCucumber/gh-dir.git"
   },
-  "keywords": [],
-  "author": "souvikat001@gmail.com <souvikat001@gmail.com> (https://github.com/DarthCucumber)",
-  "license": "ISC",
+  "keywords": [
+    "github",
+    "directory",
+    "download",
+    "file-downloader",
+    "gh-dir"
+  ],
+  "author": "Souvik Kar Mahapatra <souvikat001@gmail.com> (https://github.com/DarthCucumber)",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DarthCucumber/gh-download-dir/issues"
+    "url": "https://github.com/DarthCucumber/gh-dir/issues"
   },
-  "homepage": "https://github.com/DarthCucumber/gh-download-dir#readme"
+  "homepage": "https://github.com/DarthCucumber/gh-dir#readme"
 }
