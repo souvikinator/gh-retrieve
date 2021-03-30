@@ -19,7 +19,8 @@ module.exports = async function GithubDirDownload(options) {
     let files = {};
     if (resp.status === 200) {
         //get downloadable url list of files
-        files = await GetFileRecursive(resp.data).catch(err => { throw new Error(err) });
+        //passing response data and target directory
+        files = await GetFileRecursive(resp.data,options.dir).catch(err => { throw new Error(err) });
     }
     // if empty file list
     if(Object.keys(files).length===0){
@@ -27,6 +28,7 @@ module.exports = async function GithubDirDownload(options) {
     }
 
     // begin download
+    // passing collected files and output directory
     await downloadFiles(files,options.outdir)
     return Object.keys(files);
 };
