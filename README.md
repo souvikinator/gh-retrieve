@@ -4,7 +4,13 @@ Nodejs module to download/retrieve a specific directory or sub-directory from a 
 
 Any contribution is appreciated and please do report bugs if you find any.
 
+- **v1.0.2**: previous fix lead to bug, not downloading file contents. Fixed now
+
 - **v1.0.1**: fixed minor directory bug
+
+## Todo:
+
+- [] a bit slow! make it fast
 
 ## Installation
 

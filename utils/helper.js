@@ -32,9 +32,8 @@ exports.downloadFiles = async function (fileList, outdir) {
         let dirpath = path.join(outdir, filepath);
         // createParentDir(dirpath);
         let downloadUrl = fileList[filepath];
-        fs.ensureFile(dirpath,async (err) => {
-            if(err) throw new Error(err);
-            await download(downloadUrl); 
-        });
+        // create file before downloading
+        fs.ensureFileSync(dirpath);
+        fs.writeFile(dirpath, await download(downloadUrl));
     }
 }
