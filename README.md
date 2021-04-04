@@ -2,6 +2,11 @@
 
 Nodejs module to download/retrieve a specific directory or sub-directory from a public GitHub repository
 
+**NOTE:** since it uses github API, making more than 60 request may give 403,433 or 404 error so simply wait for an hour.
+
+If you are okay with bash scripts then go for the following: [Downloading a specific directory from Github](https://gist.github.com/DarthCucumber/0dbda7832a63af6a1cabd09b585d73cd)
+
+
 Any contribution is appreciated and please do report bugs if you find any.
 
 - **v1.0.2**: previous fix lead to bug, not downloading file contents. Fixed now
