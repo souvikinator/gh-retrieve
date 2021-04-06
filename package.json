@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "download": "^8.0.0",
+    "execa": "^5.0.0",
     "fs-extra": "^9.1.0",
     "url-join": "^4.0.1"
   },

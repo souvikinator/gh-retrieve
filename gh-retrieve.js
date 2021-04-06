@@ -1,17 +1,23 @@
 const axios = require('axios');
 const GetFileRecursive = require('./utils/recursive');
-let { verifyOptions, formUrl,downloadFiles } = require('./utils/helper');
-module.exports = async function GithubDirDownload(options) {
+const { verifyRecursiveOptions, verifySparseOptions, formUrl, downloadFiles } = require('./utils/helper');
+const {sparseCheckout}=require('./utils/sparseDownload');
+const path = require('path');
+
+/**
+ * @description downloads file recursively, however is limited by github API limits (60 request to a repo per hour)
+ */
+exports.recursiveDownload = async function (options) {
     options = Object.assign({
         author: "",
         repo: "",
-        dir: "",
+        targetdir: "",
         branch: "",
         outdir: "./"
     }, options);
 
     // throws error if anything wrong with options
-    verifyOptions(options);
+    verifyRecursiveOptions(options);
     //generates api URL based on options
     const url = formUrl(options);
     // make request to github api
@@ -20,15 +26,42 @@ module.exports = async function GithubDirDownload(options) {
     if (resp.status === 200) {
         //get downloadable url list of files
         //passing response data and target directory
-        files = await GetFileRecursive(resp.data,options.dir).catch(err => { throw new Error(err) });
+        files = await GetFileRecursive(resp.data, options.targetdir).catch(err => { throw new Error(err) });
     }
     // if empty file list
-    if(Object.keys(files).length===0){
+    if (Object.keys(files).length === 0) {
         throw new Error(`no files to download!`);
     }
 
     // begin download
     // passing collected files and output directory
-    await downloadFiles(files,options.outdir)
+    await downloadFiles(files, options.outdir)
     return Object.keys(files);
 };
+
+/**
+ * 
+ * @description download specific directory without breaking the git workflow and also is not limited by
+ * the github api, however one should have git installed
+ */
+exports.sparseDownload = async function (options) {
+    options = Object.assign({
+        cloneurl: "",
+        targetdir: "",
+        branch: "",
+        outdir: "./"
+    }, options);
+
+    // throws error if anything wrong with options
+    verifySparseOptions(options);
+    // const scriptPath = path.join(__dirname, "scripts", "downloadDir.sh")
+    // await chmod(scriptPath).catch(err => { throw new Error(err) });
+    // // execute scripts
+    // await runScript(scriptPath, options)
+    //     .then(res => (res))
+    //     .catch(err => { throw new Error(err) });
+    await sparseCheckout(options)
+    .catch(err=>{ 
+        throw new Error(err);
+    });
+}
