@@ -7,7 +7,7 @@ Nodejs module to download/retrieve a specific directory or sub-directory from a 
 Any contribution is appreciated.
 please do report bugs if you find any over here: [issues](https://github.com/DarthCucumber/gh-retrieve/issues)
 
-- **v1.1.0**:
+- **v1.1.1**:
 
   - **Breaking changes**
 
