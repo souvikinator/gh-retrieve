@@ -5,7 +5,7 @@ Nodejs module to download/retrieve a specific directory or sub-directory from a 
 **NOTE:** since it uses github API, making more than 60 request may give 403,433 or 404 error so simply wait for an hour.
 
 Any contribution is appreciated.
-please do report bugs if you find any over here: (issues)[https://github.com/DarthCucumber/gh-retrieve/issues]
+please do report bugs if you find any over here: [issues](https://github.com/DarthCucumber/gh-retrieve/issues)
 
 - **v1.1.0**:
 
