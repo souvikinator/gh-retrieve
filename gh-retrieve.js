@@ -1,8 +1,7 @@
 const axios = require('axios');
 const GetFileRecursive = require('./utils/recursive');
-const { verifyRecursiveOptions, verifySparseOptions, formUrl, downloadFiles } = require('./utils/helper');
-const {sparseCheckout}=require('./utils/sparseDownload');
-const path = require('path');
+const { verifyRecursiveOptions, verifySparseOptions, formUrl, downloadFiles, gitExists } = require('./utils/helper');
+const { sparseCheckout } = require('./utils/sparseDownload');
 
 /**
  * @description downloads file recursively, however is limited by github API limits (60 request to a repo per hour)
@@ -40,7 +39,6 @@ exports.recursiveDownload = async function (options) {
 };
 
 /**
- * 
  * @description download specific directory without breaking the git workflow and also is not limited by
  * the github api, however one should have git installed
  */
@@ -49,19 +47,17 @@ exports.sparseDownload = async function (options) {
         cloneurl: "",
         targetdir: "",
         branch: "",
-        outdir: "./"
+        outdir: ""
     }, options);
 
+    //git exists?
+    if(!gitExists()){
+        throw new Error("To use sparseCheckout git must be installed");
+    }
     // throws error if anything wrong with options
     verifySparseOptions(options);
-    // const scriptPath = path.join(__dirname, "scripts", "downloadDir.sh")
-    // await chmod(scriptPath).catch(err => { throw new Error(err) });
-    // // execute scripts
-    // await runScript(scriptPath, options)
-    //     .then(res => (res))
-    //     .catch(err => { throw new Error(err) });
     await sparseCheckout(options)
-    .catch(err=>{ 
-        throw new Error(err);
-    });
+        .catch(err => {
+            throw new Error(err);
+        });
 }

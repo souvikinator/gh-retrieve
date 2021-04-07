@@ -3,6 +3,7 @@ const download = require('download');
 const fs = require('fs-extra');
 const path = require('path');
 const execa = require('execa');
+const { lookpath } = require('lookpath');
 
 // verify passed options for recursive download
 exports.verifyRecursiveOptions = function (options) {
@@ -20,7 +21,7 @@ exports.verifyRecursiveOptions = function (options) {
 
 // verify passed options for sparse download
 exports.verifySparseOptions = function (options) {
-    let requireProp = ["cloneurl", "targetdir", "branch","outdir"];
+    let requireProp = ["cloneurl", "targetdir", "branch", "outdir"];
     for (prop in options) {
         //if compulsory option and no value provided
         if (options[prop].length === 0 && requireProp.includes(prop)) {
@@ -71,4 +72,10 @@ exports.runScript = async function (scriptPath, options) {
         .catch(err => {
             throw new Error(err);
         })
+}
+
+exports.gitExists = async function () {
+    const p = await lookpath('git');
+    if (p == undefined) return false;
+    return true;
 }

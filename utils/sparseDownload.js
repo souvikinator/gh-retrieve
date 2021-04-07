@@ -18,7 +18,6 @@ exports.sparseCheckout = async function (options) {
     // sparse checkout
     await execa('git', ['config', 'core.sparsecheckout', 'true']).catch(err => { throw new Error(err) });
     await fs.appendFile('.git/info/sparse-checkout', `${options.targetdir}\n`).catch(err => { throw new Error(err) });
-    // FIXME: some issue
     await execa('git', ['fetch']).catch(err => { throw new Error(err) });
     await execa('git', ['checkout', options.branch]).catch(err => { throw new Error(err) });
     await execa('git', ['pull', 'origin', options.branch]).catch(err => { throw new Error(err) });
