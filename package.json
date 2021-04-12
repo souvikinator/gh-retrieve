@@ -8,6 +8,7 @@
     "download": "^8.0.0",
     "execa": "^5.0.0",
     "fs-extra": "^9.1.0",
+    "is-git-repository": "^2.0.0",
     "lookpath": "^1.2.0",
     "url-join": "^4.0.1"
   },

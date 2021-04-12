@@ -1,11 +1,17 @@
 const execa = require('execa');
 const fs = require('fs-extra');
+const isGit = require('is-git-repository');
 exports.sparseCheckout = async function (options) {
     const originalcwd = process.cwd();
     // check if directory exists
     try {
         await fs.access(options.outdir);
         process.chdir(options.outdir);
+        //exists but not a git repo
+        if (!isGit(options.outdir)) {
+            await execa('git', ['init']).catch(err => { throw new Error(err) });
+            await execa('git', ['remote', 'add', 'origin', options.cloneurl]);
+        }
     } catch (err) {
         await fs.ensureDir(options.outdir)
             .catch(err => {

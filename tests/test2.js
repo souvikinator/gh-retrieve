@@ -9,7 +9,7 @@ recursiveDownload({
 	author: "DarthCucumber", //repository owner
 	repo: "gofuzz", //repository name
 	targetdir: "pkg", //target directory to download
-	outdir: "testdownload", //directory to download in
+	outdir: "../testdownload", //directory to download in
 }).then(() => {
 	spinner.succeed("download complete...");
 }).catch((err) => {

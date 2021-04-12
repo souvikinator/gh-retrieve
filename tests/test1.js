@@ -8,7 +8,7 @@ const spinner = ora("downloading files...").start();
 sparseDownload({
 	cloneurl: "https://github.com/DarthCucumber/gofuzz.git",
 	targetdir: "pkg/utils",
-	outdir: "testdownload",
+	outdir: "../testdownload",
 	branch: "master"
 }).then(data => {
 	spinner.succeed("done");
