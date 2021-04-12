@@ -1,6 +1,6 @@
 {
   "name": "gh-retrieve",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Nodejs module to download/retrieve a specific directory from a GitHub repository",
   "main": "gh-retrieve.js",
   "dependencies": {
